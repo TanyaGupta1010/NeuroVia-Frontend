@@ -37,3 +37,27 @@ body {
 .animate-scroll {
   animation: scroll 20s linear infinite;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+.section {
+  padding: 6rem 1.5rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.service-btn {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.service-btn:hover {
+  background: black;
+  color: white;
+}
+
