@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import {
   Scale,
   Briefcase,
@@ -14,19 +15,61 @@ import {
 } from "lucide-react";
 
 const domains = [
-  { title: "Law", desc: "Legal studies, justice systems, and advocacy.", icon: Scale },
-  { title: "Engineering", desc: "Innovation, construction, and technical design.", icon: Cpu },
-  { title: "Medical", desc: "Healthcare, medicine, and biology.", icon: HeartPulse },
-  { title: "Business", desc: "Finance, management, and entrepreneurship.", icon: Briefcase },
-  { title: "Technology", desc: "Software, AI, cybersecurity, and data science.", icon: Laptop },
-  { title: "Arts & Design", desc: "Creative arts, graphic design, and media.", icon: Palette },
-  { title: "Data Science", desc: "Machine learning, analytics, and statistics.", icon: LineChart },
-  { title: "Research", desc: "Scientific discovery and innovation.", icon: Microscope },
-  { title: "Programming", desc: "Frontend, backend, and full-stack development.", icon: Code },
-  { title: "Academics", desc: "Higher education and subject mastery.", icon: GraduationCap },
+  {
+    title: "Law",
+    desc: "Legal studies, justice systems, and advocacy.",
+    icon: Scale,
+  },
+  {
+    title: "Engineering",
+    desc: "Innovation, construction, and technical design.",
+    icon: Cpu,
+  },
+  {
+    title: "Medical",
+    desc: "Healthcare, medicine, and biology.",
+    icon: HeartPulse,
+  },
+  {
+    title: "Business",
+    desc: "Finance, management, and entrepreneurship.",
+    icon: Briefcase,
+  },
+  {
+    title: "Technology",
+    desc: "Software, AI, cybersecurity, and data science.",
+    icon: Laptop,
+  },
+  {
+    title: "Arts & Design",
+    desc: "Creative arts, graphic design, and media.",
+    icon: Palette,
+  },
+  {
+    title: "Data Science",
+    desc: "Machine learning, analytics, and statistics.",
+    icon: LineChart,
+  },
+  {
+    title: "Research",
+    desc: "Scientific discovery and innovation.",
+    icon: Microscope,
+  },
+  {
+    title: "Programming",
+    desc: "Frontend, backend, and full-stack development.",
+    icon: Code,
+  },
+  {
+    title: "Academics",
+    desc: "Higher education and subject mastery.",
+    icon: GraduationCap,
+  },
 ];
 
 export default function AssessmentPage() {
+  const router = useRouter();
+
   return (
     <main className="min-h-screen bg-gray-50 py-20 px-6">
       <div className="max-w-7xl mx-auto text-center">
@@ -36,7 +79,7 @@ export default function AssessmentPage() {
           Discover Your Path
         </h1>
 
-        <p className="text-black text-lg mb-12">
+        <p className="text-gray-600 text-lg mb-12">
           Select a field you're interested in to begin your personalized assessment.
         </p>
 
@@ -50,28 +93,26 @@ export default function AssessmentPage() {
               <div
                 key={index}
                 className="
-                  bg-white
-                  p-8
-                  rounded-2xl
+                  bg-white p-8 rounded-3xl shadow-sm 
                   border border-gray-200
-                  transition-all duration-300 ease-in-out
-                  cursor-pointer
+                  transition-all duration-300
+                  hover:shadow-xl
+                  hover:scale-105
                   hover:bg-blue-50
                   hover:border-blue-500
-                  hover:shadow-lg
-                  hover:-translate-y-1
+                  cursor-pointer
                 "
               >
                 {/* Icon */}
-                <div className="
-                  w-14 h-14
-                  rounded-full
-                  bg-blue-100
-                  flex items-center justify-center
-                  mb-6 mx-auto
-                  transition
-                  group-hover:bg-blue-200
-                ">
+                <div
+                  className="
+                    w-14 h-14 rounded-full bg-blue-100 
+                    flex items-center justify-center 
+                    mb-6 mx-auto
+                    transition
+                    group-hover:bg-blue-200
+                  "
+                >
                   <Icon className="w-7 h-7 text-blue-600" />
                 </div>
 
@@ -81,9 +122,24 @@ export default function AssessmentPage() {
                 </h3>
 
                 {/* Description */}
-                <p className="text-black text-sm">
+                <p className="text-gray-600 text-sm mb-6">
                   {domain.desc}
                 </p>
+
+                {/* Start Quiz Button */}
+                <button
+                  onClick={() =>
+                    router.push(
+                      `/assessment/result?domain=${domain.title}`
+                    )
+                  }
+                  className="
+                    text-blue-600 font-semibold 
+                    hover:underline
+                  "
+                >
+                  Start Quiz →
+                </button>
               </div>
             );
           })}
