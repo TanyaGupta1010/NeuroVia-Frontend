@@ -2,17 +2,23 @@
 
 export const dynamic = "force-dynamic";
 
+import dynamicImport from "next/dynamic";
 import { useSearchParams } from "next/navigation";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-  Tooltip,
-} from "recharts";
 import { useEffect, useState } from "react";
+import { Pie, Cell, Tooltip } from "recharts";
 import AuthModal from "@/app/components/AuthModal";
 
+const PieChart = dynamicImport(
+  () => import("recharts").then(m => m.PieChart),
+  { ssr: false }
+);
+
+const ResponsiveContainer = dynamicImport(
+  () => import("recharts").then(m => m.ResponsiveContainer),
+  { ssr: false }
+);
+
+/*  Sample data for Pie Chart */
 const data = [
   { name: "Technical Skills", value: 35, color: "#2563EB" },
   { name: "Soft Skills", value: 25, color: "#10B981" },
@@ -20,7 +26,7 @@ const data = [
   { name: "Industry Awareness", value: 20, color: "#F97316" },
 ];
 
-// 🔹 Custom tooltip for hover percentage
+/* 🎯 Hover tooltip */
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
     return (
@@ -44,14 +50,12 @@ export default function ResultPage() {
   const [showAuth, setShowAuth] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // ✅ Client-only logic
   useEffect(() => {
     setMounted(true);
     const d = params.get("domain");
     if (d) setDomain(d);
   }, [params]);
 
-  // ⛔ Prevent prerender crash
   if (!mounted) return null;
 
   return (
@@ -76,14 +80,12 @@ export default function ResultPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
 
-            {/* LEFT SECTION */}
+            {/* LEFT */}
             <div className="bg-white rounded-3xl p-10 shadow-md">
-
               <h2 className="text-2xl font-bold mb-8">
                 Skill Distribution
               </h2>
 
-              {/* Pie Chart */}
               <div className="h-72">
                 <ResponsiveContainer>
                   <PieChart>
@@ -103,7 +105,6 @@ export default function ResultPage() {
                 </ResponsiveContainer>
               </div>
 
-              {/* Legend */}
               <div className="mt-8 space-y-2">
                 {data.map((item, index) => (
                   <div key={index} className="flex items-center gap-3">
@@ -118,7 +119,6 @@ export default function ResultPage() {
                 ))}
               </div>
 
-              {/* Areas to Improve */}
               <div className="mt-10">
                 <h3 className="text-lg font-semibold mb-4">
                   Areas to Improve
@@ -131,10 +131,9 @@ export default function ResultPage() {
               </div>
             </div>
 
-            {/* RIGHT SECTION */}
+            {/* RIGHT */}
             <div className="space-y-8">
 
-              {/* Paid Course */}
               <div className="bg-white rounded-3xl p-8 shadow-md border border-blue-200">
                 <h3 className="text-xl font-bold mb-2">
                   Complete {domain} Masterclass
@@ -156,7 +155,6 @@ export default function ResultPage() {
                 </button>
               </div>
 
-              {/* Free Course */}
               <div className="bg-white rounded-3xl p-8 shadow-md">
                 <h3 className="text-xl font-bold mb-2">
                   Intro to {domain} Essentials
@@ -178,7 +176,6 @@ export default function ResultPage() {
                 </button>
               </div>
 
-              {/* CTA */}
               <div className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-3xl p-10 text-center">
                 <h3 className="text-2xl font-bold mb-4">
                   Ready to unlock your full potential?
