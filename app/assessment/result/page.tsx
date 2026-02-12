@@ -1,8 +1,16 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useSearchParams } from "next/navigation";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
-import { useState } from "react";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
+import { useEffect, useState } from "react";
 import AuthModal from "@/app/components/AuthModal";
 
 const data = [
@@ -12,11 +20,39 @@ const data = [
   { name: "Industry Awareness", value: 20, color: "#F97316" },
 ];
 
+// 🔹 Custom tooltip for hover percentage
+const CustomTooltip = ({ active, payload }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-white px-4 py-2 rounded-lg shadow-md border text-sm">
+        <p className="font-semibold text-gray-800">
+          {payload[0].name}
+        </p>
+        <p className="text-blue-600 font-bold">
+          {payload[0].value}%
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
 export default function ResultPage() {
   const params = useSearchParams();
-  const domain = params.get("domain");
 
+  const [domain, setDomain] = useState("your selected domain");
   const [showAuth, setShowAuth] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // ✅ Client-only logic
+  useEffect(() => {
+    setMounted(true);
+    const d = params.get("domain");
+    if (d) setDomain(d);
+  }, [params]);
+
+  // ⛔ Prevent prerender crash
+  if (!mounted) return null;
 
   return (
     <>
@@ -40,17 +76,18 @@ export default function ResultPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
 
-            {/* LEFT SIDE */}
+            {/* LEFT SECTION */}
             <div className="bg-white rounded-3xl p-10 shadow-md">
 
               <h2 className="text-2xl font-bold mb-8">
                 Skill Distribution
               </h2>
 
-              {/* Animated Pie */}
+              {/* Pie Chart */}
               <div className="h-72">
                 <ResponsiveContainer>
                   <PieChart>
+                    <Tooltip content={<CustomTooltip />} />
                     <Pie
                       data={data}
                       innerRadius={70}
@@ -86,37 +123,31 @@ export default function ResultPage() {
                 <h3 className="text-lg font-semibold mb-4">
                   Areas to Improve
                 </h3>
-
                 <ul className="space-y-2 text-gray-700">
                   <li>• Advanced Problem Solving</li>
                   <li>• Industry Specific Tools</li>
                   <li>• Project Management</li>
                 </ul>
               </div>
-
             </div>
 
-            {/* RIGHT SIDE */}
+            {/* RIGHT SECTION */}
             <div className="space-y-8">
 
-              {/* Premium Course */}
+              {/* Paid Course */}
               <div className="bg-white rounded-3xl p-8 shadow-md border border-blue-200">
                 <h3 className="text-xl font-bold mb-2">
                   Complete {domain} Masterclass
                 </h3>
-
                 <p className="text-gray-600 mb-4">
                   40 Hours • Certificate Included
                 </p>
-
                 <p className="text-gray-600 mb-6">
                   Deep dive into advanced concepts with industry experts.
                 </p>
-
                 <div className="text-2xl font-bold mb-4">
                   $49.99
                 </div>
-
                 <button
                   onClick={() => setShowAuth(true)}
                   className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700"
@@ -130,19 +161,15 @@ export default function ResultPage() {
                 <h3 className="text-xl font-bold mb-2">
                   Intro to {domain} Essentials
                 </h3>
-
                 <p className="text-gray-600 mb-4">
                   12 Hours • Self-paced
                 </p>
-
                 <p className="text-gray-600 mb-6">
                   Perfect for beginners looking to build foundation.
                 </p>
-
                 <div className="text-green-600 font-bold text-xl mb-4">
                   Free
                 </div>
-
                 <button
                   onClick={() => setShowAuth(true)}
                   className="px-6 py-3 border border-green-600 text-green-600 rounded-xl hover:bg-green-50"
@@ -151,16 +178,14 @@ export default function ResultPage() {
                 </button>
               </div>
 
-              {/* CTA Box */}
+              {/* CTA */}
               <div className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-3xl p-10 text-center">
                 <h3 className="text-2xl font-bold mb-4">
                   Ready to unlock your full potential?
                 </h3>
-
                 <p className="mb-6">
                   Create an account to save your results.
                 </p>
-
                 <button
                   onClick={() => setShowAuth(true)}
                   className="bg-white text-black px-8 py-3 rounded-xl font-semibold"
