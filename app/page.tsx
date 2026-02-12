@@ -39,6 +39,7 @@ export default function HomePage() {
               >
                 Take Skill Quiz
               </a>
+
             </div>
           </div>
 
