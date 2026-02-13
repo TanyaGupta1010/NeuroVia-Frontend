@@ -1,11 +1,27 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 
 export default function AuthModal({ close }: any) {
   const [isLogin, setIsLogin] = useState(false);
+  const [email, setEmail] = useState("");
+  const router = useRouter();
+
+  const handleAuth = () => {
+    if (!email) {
+      alert("Please enter email");
+      return;
+    }
+
+    // Save email
+    localStorage.setItem("userEmail", email);
+
+    close(); // close modal
+    router.push("/dashboard"); // redirect
+  };
 
   return (
     <div className="fixed inset-0 backdrop-blur-md bg-black/30 flex items-center justify-center z-50">
@@ -43,7 +59,6 @@ export default function AuthModal({ close }: any) {
 
         <hr className="mb-6" />
 
-        {/* Title */}
         <h2 className="text-3xl font-bold text-center text-black mb-2">
           NeuroVia
         </h2>
@@ -54,7 +69,7 @@ export default function AuthModal({ close }: any) {
             : "Sign up for free to start learning."}
         </p>
 
-        {/* Social Buttons */}
+        {/* Social */}
         <button className="w-full border border-gray-300 py-3 rounded-full mb-3 flex items-center justify-center gap-3 hover:bg-gray-100 text-black font-medium">
           <FcGoogle size={20} />
           Continue with Google
@@ -77,25 +92,30 @@ export default function AuthModal({ close }: any) {
             <input
               type="text"
               placeholder="Enter your profile name"
-              className="w-full border border-black rounded-xl px-4 py-3 text-black placeholder-gray-500"
+              className="w-full border border-black rounded-xl px-4 py-3 text-black"
             />
           )}
 
           <input
             type="email"
             placeholder="name@domain.com"
-            className="w-full border border-black rounded-xl px-4 py-3 text-black placeholder-gray-500"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full border border-black rounded-xl px-4 py-3 text-black"
           />
 
           <input
             type="password"
             placeholder="Password"
-            className="w-full border border-black rounded-xl px-4 py-3 text-black placeholder-gray-500"
+            className="w-full border border-black rounded-xl px-4 py-3 text-black"
           />
         </div>
 
         {/* Main Button */}
-        <button className="w-full bg-black text-white py-3 rounded-xl mt-6 font-semibold hover:bg-gray-900 transition">
+        <button
+          onClick={handleAuth}
+          className="w-full bg-black text-white py-3 rounded-xl mt-6 font-semibold hover:bg-gray-900 transition"
+        >
           {isLogin ? "Log In" : "Sign Up"}
         </button>
 
@@ -108,7 +128,6 @@ export default function AuthModal({ close }: any) {
             {isLogin ? "Sign Up" : "Log In"}
           </span>
         </p>
-
       </div>
     </div>
   );
