@@ -11,16 +11,23 @@ import {
 
 function DashboardNavbar({ email }: { email: string }) {
   const router = useRouter();
+
   const [openLib, setOpenLib] = useState(false);
   const [openNotif, setOpenNotif] = useState(false);
+  const [openStreak, setOpenStreak] = useState(false);
 
   const { notifications, markAsRead } = useNotifications();
   const unreadCount = notifications.filter((n) => !n.read).length;
 
+  /* ---------- STREAK MOCK DATA ---------- */
+  const currentStreak = 3;
+  const weekDays = ["M", "T", "W", "T", "F", "S", "S"];
+  const completedDays = [1, 2, 3]; // example completed days
+
   return (
     <nav className="bg-white border-b h-[88px] px-12 flex items-center justify-between shadow-sm">
 
-      {/* LEFT SECTION */}
+      {/* ================= LEFT ================= */}
       <div className="flex items-center gap-12">
 
         <Image
@@ -36,12 +43,12 @@ function DashboardNavbar({ email }: { email: string }) {
 
           <span
             onClick={() => router.push("/dashboard")}
-            className="cursor-pointer hover:text-blue-600 transition duration-200"
+            className="cursor-pointer hover:text-blue-600 transition"
           >
             Dashboard
           </span>
 
-          <span className="cursor-pointer hover:text-blue-600 transition duration-200">
+          <span className="cursor-pointer hover:text-blue-600 transition">
             MySkills
           </span>
 
@@ -51,7 +58,7 @@ function DashboardNavbar({ email }: { email: string }) {
             onMouseEnter={() => setOpenLib(true)}
             onMouseLeave={() => setOpenLib(false)}
           >
-            <span className="cursor-pointer hover:text-blue-600 flex items-center gap-1 transition">
+            <span className="cursor-pointer hover:text-blue-600 flex items-center gap-1">
               Libraries
               <span
                 className={`transition-transform duration-300 ${
@@ -63,7 +70,7 @@ function DashboardNavbar({ email }: { email: string }) {
             </span>
 
             <div
-              className={`absolute top-10 left-0 bg-white shadow-xl rounded-xl w-52 py-2 border border-gray-200 transition-all duration-300 origin-top
+              className={`absolute top-10 left-0 bg-white shadow-xl rounded-xl w-52 py-2 border border-gray-200 transition-all duration-300
               ${
                 openLib
                   ? "opacity-100 scale-100"
@@ -72,35 +79,79 @@ function DashboardNavbar({ email }: { email: string }) {
             >
               <div
                 onClick={() => router.push("/libraries/courses")}
-                className="px-4 py-3 hover:bg-blue-50 cursor-pointer transition"
+                className="px-4 py-3 hover:bg-blue-50 cursor-pointer"
               >
                 Courses
               </div>
 
               <div
                 onClick={() => router.push("/libraries/internships")}
-                className="px-4 py-3 hover:bg-blue-50 cursor-pointer transition"
+                className="px-4 py-3 hover:bg-blue-50 cursor-pointer"
               >
                 Internships
               </div>
             </div>
           </div>
 
-          <span className="cursor-pointer hover:text-blue-600 transition duration-200">
+          <span className="cursor-pointer hover:text-blue-600 transition">
             Roadmap
           </span>
         </div>
       </div>
 
-      {/* RIGHT SECTION */}
-      <div className="flex items-center gap-8">
+      {/* ================= RIGHT ================= */}
+      <div className="flex items-center gap-10">
 
-        <div className="flex items-center gap-1 text-orange-500 font-semibold">
-          <Flame size={20} />
-          <span>5</span>
+        {/* ---------- STREAK ---------- */}
+        <div
+          className="relative"
+          onMouseEnter={() => setOpenStreak(true)}
+          onMouseLeave={() => setOpenStreak(false)}
+        >
+          <div className="flex items-center gap-1 text-orange-500 font-semibold cursor-pointer">
+            <Flame size={20} />
+            <span>{currentStreak}</span>
+          </div>
+
+          <div
+            className={`absolute left-0 mt-4 w-72 bg-white border border-gray-200 rounded-2xl shadow-xl p-6 transition-all duration-300
+            ${
+              openStreak
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 -translate-y-2 invisible"
+            }`}
+          >
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-lg font-semibold text-black">
+                {currentStreak} Day Streak
+              </h3>
+              <Flame className="text-orange-500" size={20} />
+            </div>
+
+            <p className="text-sm text-gray-600 mb-6">
+              Do a lesson today to continue your streak.
+            </p>
+
+            <div className="flex justify-between">
+              {weekDays.map((day, index) => (
+                <div key={index} className="flex flex-col items-center gap-2">
+                  <span className="text-xs text-gray-500">{day}</span>
+
+                  <div
+                    className={`w-8 h-8 rounded-full border transition
+                    ${
+                      completedDays.includes(index + 1)
+                        ? "bg-orange-500 border-orange-500"
+                        : "border-gray-300"
+                    }`}
+                  ></div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* NOTIFICATIONS */}
+        {/* ---------- NOTIFICATIONS ---------- */}
         <div
           className="relative"
           onMouseEnter={() => setOpenNotif(true)}
@@ -110,22 +161,21 @@ function DashboardNavbar({ email }: { email: string }) {
             <Bell size={22} className="text-black" />
 
             {unreadCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full shadow">
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                 {unreadCount}
               </span>
             )}
           </div>
 
-          {/* DROPDOWN */}
           <div
-            className={`absolute right-0 mt-4 w-80 bg-white rounded-2xl shadow-2xl border border-gray-200 transition-all duration-300 origin-top
+            className={`absolute right-0 mt-4 w-80 bg-white border border-gray-200 rounded-2xl shadow-xl transition-all duration-300
             ${
               openNotif
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 -translate-y-2 invisible"
             }`}
           >
-            <div className="p-4 border-b border-gray-200 font-semibold text-black !text-black">
+            <div className="p-4 border-b border-gray-200 font-semibold text-black">
               Notifications
             </div>
 
@@ -133,7 +183,7 @@ function DashboardNavbar({ email }: { email: string }) {
               <div
                 key={note.id}
                 onClick={() => markAsRead(note.id)}
-                className={`px-4 py-3 border-b border-gray-200 cursor-pointer transition duration-200
+                className={`px-4 py-3 border-b border-gray-200 cursor-pointer transition
                 ${
                   !note.read
                     ? "bg-blue-50 hover:bg-blue-100"
@@ -142,23 +192,25 @@ function DashboardNavbar({ email }: { email: string }) {
               >
                 <div className="flex items-center gap-2">
                   {!note.read && (
-                    <span className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0"></span>
+                    <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
                   )}
 
-                  <p className="text-sm font-semibold text-black !text-black">
+                  <p className="text-sm font-medium text-black">
                     {note.title}
                   </p>
                 </div>
 
-                <p className="text-xs mt-1 text-black !text-black">
+                <p className="text-xs mt-1 text-black">
                   {note.time}
                 </p>
               </div>
             ))}
 
-            <div className="p-3 text-center border-t border-gray-200">
+            <div className="p-3 text-center">
               <button
-                onClick={() => router.push("/dashboard/notifications")}
+                onClick={() =>
+                  router.push("/dashboard/notifications")
+                }
                 className="text-blue-600 font-semibold hover:underline"
               >
                 View All
@@ -167,13 +219,14 @@ function DashboardNavbar({ email }: { email: string }) {
           </div>
         </div>
 
-        {/* PROFILE */}
+        {/* ---------- PROFILE ---------- */}
         <div className="flex items-center gap-2">
           <User className="bg-gray-200 p-1 rounded-full" size={30} />
           <span className="text-sm font-medium text-black">
             {email}
           </span>
         </div>
+
       </div>
     </nav>
   );
