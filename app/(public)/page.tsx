@@ -1,5 +1,5 @@
 "use client";
-
+import { BookOpenText } from "lucide-react";
 import { useState } from "react";
 import AutoCarousel from "@/app/components/AutoCarousel";
 import AuthModal from "@/app/components/AuthModal";
@@ -51,13 +51,23 @@ export default function HomePage() {
 
         {/* ================= COURSES & INTERNSHIPS ================= */}
         <section className="bg-gray-50 py-16">
-          <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-3xl font-bold mb-8">
-              Courses & Internships
-            </h2>
-            <AutoCarousel />
-          </div>
-        </section>
+  <div className="max-w-7xl mx-auto px-6">
+    
+    {/* Header with Icon */}
+    <div className="flex items-center gap-4 mb-8">
+      <div className="w-14 h-14 rounded-full bg-[#A9D6E5] flex items-center justify-center">
+        <BookOpenText className="w-8 h-8 text-black" />
+      </div>
+
+      <h2 className="text-3xl font-bold">
+        Courses & Internships
+      </h2>
+    </div>
+
+    <AutoCarousel />
+    
+  </div>
+</section>
 
 
         {/* ================= WHY NEUROVIA ================= */}

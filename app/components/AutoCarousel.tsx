@@ -1,27 +1,78 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+
 export default function AutoCarousel() {
-  const items = [
-    "Web Development",
-    "DSA & Problem Solving",
-    "AI / Machine Learning",
-    "Data Science",
-    "Internships",
-    "Live Projects",
-  ];
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    let animationFrame: number;
+
+    const animate = () => {
+      if (!track) return;
+
+      if (!isPaused) {
+        track.scrollLeft += 0.5;
+
+        if (track.scrollLeft >= track.scrollWidth / 2) {
+          track.scrollLeft = 0;
+        }
+      }
+
+      animationFrame = requestAnimationFrame(animate);
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, [isPaused]);
+
+  const numbers = [1, 2, 3, 4, 5, 6];
 
   return (
-    <div className="relative w-full overflow-hidden">
-      <div className="flex w-max animate-carousel gap-6">
-        {[...items, ...items].map((item, index) => (
+    <section
+      className="relative w-full py-2 bg-white overflow-hidden"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {/* Soft Edge Fade */}
+      <div className="pointer-events-none absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-white to-transparent z-10" />
+      <div className="pointer-events-none absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-white to-transparent z-10" />
+
+      <div
+        ref={trackRef}
+        className="flex gap-12 overflow-x-hidden"
+      >
+        {[...numbers, ...numbers].map((num, index) => (
           <div
             key={index}
-            className="min-w-[260px] h-40 bg-white border border-gray-200 rounded-xl flex items-center justify-center font-semibold text-black"
+            className="
+              min-w-[260px]
+              h-[160px]
+              bg-white
+              rounded-3xl
+              flex
+              items-center
+              justify-center
+              text-5xl
+              font-semibold
+              text-black
+              transition-all
+              duration-500
+              ease-[cubic-bezier(0.22,1,0.36,1)]
+              shadow-[0_4px_12px_rgba(0,0,0,0.04)]
+              hover:-translate-y-2
+              hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)]
+            "
           >
-            {item}
+            {num}
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

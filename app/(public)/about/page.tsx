@@ -1,3 +1,5 @@
+import { Award, GraduationCap, LandPlot, Trophy, Users } from "lucide-react";
+
 export default function AboutPage() {
   return (
     <main className="bg-white text-black">
@@ -40,7 +42,7 @@ export default function AboutPage() {
               "Career-focused guidance",
             ].map((item, index) => (
               <li key={index} className="flex items-start gap-4">
-                <span className="mt-1 h-4 w-4 rounded-full bg-blue-600"></span>
+                <span className="mt-1 h-4 w-4 rounded-full bg-[#8acce2]"></span>
                 <p className="text-gray-700">{item}</p>
               </li>
             ))}
@@ -62,16 +64,7 @@ export default function AboutPage() {
             <CoreValue
               title="Student-Focused"
               desc="Every decision we make puts our learners first"
-              icon={
-                <svg viewBox="0 0 24 24" className="h-7 w-7">
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M8 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"
-                  />
-                </svg>
-              }
+              icon={<GraduationCap className="h-9 w-9 text-black" />}
             />
 
             {/* Goal Oriented */}
@@ -79,17 +72,7 @@ export default function AboutPage() {
               title="Goal-Oriented"
               desc="We help you achieve your career objectives"
               icon={
-                <svg viewBox="0 0 24 24" className="h-7 w-7">
-                  <circle
-                    cx="12"
-                    cy="12"
-                    r="9"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                  <circle cx="12" cy="12" r="3" fill="currentColor" />
-                </svg>
+                <LandPlot className="h-9 w-9 text-black" />
               }
             />
 
@@ -98,14 +81,7 @@ export default function AboutPage() {
               title="Excellence"
               desc="Committed to delivering the highest quality education"
               icon={
-                <svg viewBox="0 0 24 24" className="h-7 w-7">
-                  <path
-                    d="M12 2l3 7h7l-5.5 4.5L18 21l-6-3.5L6 21l1.5-7.5L2 9h7z"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  />
-                </svg>
+                <Trophy className="h-9 w-9 text-black" />
               }
             />
 
@@ -114,14 +90,7 @@ export default function AboutPage() {
               title="Community"
               desc="Building a supportive network of learners"
               icon={
-                <svg viewBox="0 0 24 24" className="h-7 w-7">
-                  <path
-                    d="M12 21s-8-6-8-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5-10 11-10 11z"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  />
-                </svg>
+                <Users className="h-9 w-9 text-black" />
               }
             />
 
@@ -144,7 +113,7 @@ function CoreValue({
 }) {
   return (
     <div className="border border-gray-200 rounded-2xl p-10 text-center hover:shadow-lg transition">
-      <div className="mx-auto mb-6 h-14 w-14 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+      <div className="mx-auto mb-6 h-14 w-14 rounded-full bg-[#A9D6E5] flex items-center justify-center">
         {icon}
       </div>
       <h3 className="text-xl font-semibold mb-3">{title}</h3>
