@@ -7,7 +7,7 @@ export default function Footer() {
 
         {/* LEFT: BRAND */}
         <div className="md:col-span-2">
-          <h2 className="text-4xl font-bold mb-4">neurovia</h2>
+          <h2 className="text-4xl font-bold mb-4">NeuroVia</h2>
           <p className="text-gray-400 max-w-md">
             NeuroVia is an AI-powered learning platform that evaluates your
             skills, builds personalized roadmaps, and guides you toward
