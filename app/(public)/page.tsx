@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { BookOpenText } from "lucide-react";
 import { useState } from "react";
 import AutoCarousel from "@/app/components/AutoCarousel";
@@ -43,9 +44,15 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="h-80 bg-gray-100 rounded-xl flex items-center justify-center text-gray-500">
-            Product Dashboard Preview
-          </div>
+          <div className="relative h-150 w-full">
+            <Image
+            src="/career-illustration.png"
+    alt="Career Guidance Illustration"
+    fill
+    className="object-contain"
+    priority
+  />
+</div>
         </section>
 
 

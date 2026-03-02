@@ -16,7 +16,7 @@ export default function NotificationsPage() {
 
         <button
           onClick={markAllAsRead}
-          className="text-blue-600 font-semibold hover:underline"
+          className="text-[#5ebcdc] font-semibold hover:underline"
         >
           Mark all as read
         </button>
