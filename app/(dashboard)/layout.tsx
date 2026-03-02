@@ -8,8 +8,7 @@ import {
   NotificationProvider,
   useNotifications,
 } from "./NotificationContext";
-
-function DashboardNavbar({ email }: { email: string }) {
+function DashboardNavbar({ email, streak }: { email: string; streak: number }) {
   const router = useRouter();
 
   const [openLib, setOpenLib] = useState(false);
@@ -20,9 +19,8 @@ function DashboardNavbar({ email }: { email: string }) {
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   /* ---------- STREAK MOCK DATA ---------- */
-  const currentStreak = 3;
   const weekDays = ["M", "T", "W", "T", "F", "S", "S"];
-  const completedDays = [1, 2, 3]; // example completed days
+  const completedDays = [1, 2, 3, 4, 5]; // example completed days
 
   return (
     <nav className="bg-white border-b h-[88px] px-12 flex items-center justify-between shadow-sm">
@@ -110,7 +108,7 @@ function DashboardNavbar({ email }: { email: string }) {
         >
           <div className="flex items-center gap-1 text-orange-500 font-semibold cursor-pointer">
             <Flame size={20} />
-            <span>{currentStreak}</span>
+            <span>{streak}</span>
           </div>
 
           <div
@@ -123,7 +121,7 @@ function DashboardNavbar({ email }: { email: string }) {
           >
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-lg font-semibold text-black">
-                {currentStreak} Day Streak
+                {streak} Day Streak
               </h3>
               <Flame className="text-orange-500" size={20} />
             </div>
@@ -238,6 +236,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const [email, setEmail] = useState("");
+  const [streak, setStreak] = useState(5);
 
   useEffect(() => {
     const storedEmail = localStorage.getItem("userEmail");
@@ -247,7 +246,7 @@ export default function DashboardLayout({
   return (
     <NotificationProvider>
       <div className="min-h-screen bg-gray-50">
-        <DashboardNavbar email={email} />
+        <DashboardNavbar email={email} streak={streak} />
         {children}
       </div>
     </NotificationProvider>

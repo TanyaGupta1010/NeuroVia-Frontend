@@ -1,5 +1,5 @@
 import { Award, GraduationCap, LandPlot, Trophy, Users } from "lucide-react";
-
+import Image from "next/image";
 export default function AboutPage() {
   return (
     <main className="bg-white text-black">
@@ -14,8 +14,28 @@ export default function AboutPage() {
       </section>
 
       {/* ================= SECTION 1 : MISSION & WHY US ================= */}
-      <section className="max-w-7xl mx-auto px-6 pb-12 grid grid-cols-1 md:grid-cols-2 gap-20">
-        
+<section className="max-w-7xl mx-auto px-6 pb-12 grid grid-cols-1 md:grid-cols-2 gap-20">
+   {/* LEFT IMAGE */}
+  <div className="hidden lg:block absolute left-10 top-1/2 -translate-y-1/2">
+    <Image
+      src="/right-image.png"
+      alt="Left Illustration"
+      width={600}
+      height={800}
+      className="object-contain"
+    />
+  </div>
+
+  {/* RIGHT IMAGE */}
+  <div className="hidden lg:block absolute right-10 top-1/2 -translate-y-1/2">
+    <Image
+      src="/left-image.png"
+      alt="Right Illustration"
+      width={600}
+      height={800}
+      className="object-contain"
+    />
+  </div>        
         {/* LEFT */}
         <div>
           <h2 className="text-3xl font-bold mb-6">Our Mission</h2>

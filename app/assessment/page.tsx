@@ -10,7 +10,7 @@ import {
   Code,
   LineChart,
   Microscope,
-  Cpu,
+  Toolbox,
   GraduationCap,
 } from "lucide-react";
 
@@ -23,7 +23,7 @@ const domains = [
   {
     title: "Engineering",
     desc: "Innovation, construction, and technical design.",
-    icon: Cpu,
+    icon: Toolbox,
   },
   {
     title: "Medical",
@@ -71,7 +71,35 @@ export default function AssessmentPage() {
   const router = useRouter();
 
   return (
-    <main className="min-h-screen bg-gray-50 py-20 px-6">
+    <main className="relative min-h-screen bg-gray-50 py-20 px-6 overflow-hidden"
+    >{/* Left Decorative Image */}
+<img
+  src="/Peeking left.png"
+  alt="Decorative"
+  className="
+    hidden lg:block
+    absolute left-0 top-1/2
+    -translate-y-1/2
+    -translate-x-1/3
+    w-150
+    opacity-100
+    pointer-events-none
+  "
+/>
+{/* Right Decorative Image */}
+<img
+  src="/Peeking right.png"
+  alt="Decorative"
+  className="
+    hidden lg:block
+    absolute right-0 top-1/2
+    -translate-y-1/2
+    translate-x-1/3
+    w-150
+    opacity-100
+    pointer-events-none
+  "
+/>
       <div className="max-w-7xl mx-auto text-center">
 
         {/* Heading */}
@@ -105,15 +133,10 @@ export default function AssessmentPage() {
               >
                 {/* Icon */}
                 <div
-                  className="
-                    w-14 h-14 rounded-full bg-blue-100 
-                    flex items-center justify-center 
-                    mb-6 mx-auto
-                    transition
-                    group-hover:bg-blue-200
-                  "
-                >
-                  <Icon className="w-7 h-7 text-blue-600" />
+                className="
+                w-14 h-14 rounded-full bg-[#A9D6E5] 
+                flex items-center justify-center mb-6 mx-auto">
+                  <Icon className="w-8 h-8 text-black" />
                 </div>
 
                 {/* Title */}
@@ -134,7 +157,7 @@ export default function AssessmentPage() {
                     )
                   }
                   className="
-                    text-blue-600 font-semibold 
+                    text-[#2ca2ca] font-semibold 
                     hover:underline
                   "
                 >

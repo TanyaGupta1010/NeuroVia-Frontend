@@ -9,37 +9,73 @@ import {
   Goal,
   BadgeCheck,
 } from "lucide-react";
+import Image from "next/image";
 export default function ServicesPage() {
   return (
     <main className="bg-gray-50 text-black">
       {/* ================= SERVICES HERO ================= */}
-      <section className="pt-20 pb-12 text-center">
-        <h1 className="text-5xl font-bold mb-4">Our Services</h1>
+<section className="relative pt-24 pb-20 text-center overflow-hidden">
 
-        <p className="text-lg mb-10">
-          Comprehensive solutions to accelerate your career growth
-        </p>
+  {/* HERO CONTENT WRAPPER */}
+  <div className="relative max-w-4xl mx-auto">
 
-        <div className="flex justify-center gap-6 flex-wrap">
-          <a
-            href="#assessment"
-            className="px-6 py-3 border border-gray-400 rounded-xl bg-white hover:bg-black hover:text-white transition"
-          >
-            Assessment
-          </a>
-          <a
-            href="#courses"
-            className="px-6 py-3 border border-gray-400 rounded-xl bg-white hover:bg-black hover:text-white transition"
-          >
-            Courses & Internships
-          </a>
-          <a
-            href="#roadmap"
-            className="px-6 py-3 border border-gray-400 rounded-xl bg-white hover:bg-black hover:text-white transition"
-          >
-            Roadmap
-          </a>
-        </div>
+    {/* LEFT CHARACTER */}
+    <div className="hidden xl:block absolute -left-44 top-1/2 -translate-y-1/2">
+      <Image
+        src="/services-left.png"
+        alt="Left character"
+        width={300}
+        height={500}
+        className="object-contain"
+        priority
+      />
+    </div>
+
+    {/* RIGHT CHARACTER */}
+    <div className="hidden xl:block absolute -right-44 top-1/2 -translate-y-1/2">
+      <Image
+        src="/services-right.png"
+        alt="Right character"
+        width={300}
+        height={500}
+        className="object-contain"
+        priority
+      />
+    </div>
+
+    {/* TEXT CONTENT */}
+    <h1 className="text-5xl font-bold mb-4">
+      Our Services
+    </h1>
+
+    <p className="text-lg mb-10">
+      Comprehensive solutions to accelerate your career growth
+    </p>
+
+    <div className="flex justify-center gap-6 flex-wrap">
+      <a
+        href="#assessment"
+        className="px-6 py-3 border border-gray-400 rounded-xl bg-white hover:bg-black hover:text-white transition"
+      >
+        Assessment
+      </a>
+
+      <a
+        href="#courses"
+        className="px-6 py-3 border border-gray-400 rounded-xl bg-white hover:bg-black hover:text-white transition"
+      >
+        Courses & Internships
+      </a>
+
+      <a
+        href="#roadmap"
+        className="px-6 py-3 border border-gray-400 rounded-xl bg-white hover:bg-black hover:text-white transition"
+      >
+        Roadmap
+      </a>
+    </div>
+
+  </div>
       </section>
       {/* ================= ASSESSMENT ================= */}
       <section id="assessment" className="py-20">

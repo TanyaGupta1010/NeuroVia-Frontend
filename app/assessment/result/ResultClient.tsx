@@ -29,7 +29,7 @@ const CustomTooltip = ({ active, payload }: any) => {
     return (
       <div className="bg-white px-4 py-2 rounded-lg shadow-md border text-sm">
         <p className="font-semibold">{payload[0].name}</p>
-        <p className="text-blue-600 font-bold">{payload[0].value}%</p>
+        <p className="text-[#A9D6E5] font-bold">{payload[0].value}%</p>
       </div>
     );
   }
@@ -60,7 +60,7 @@ export default function ResultClient() {
             </h1>
             <p className="text-gray-600 text-lg">
               Based on your responses for{" "}
-              <span className="text-blue-600 font-semibold">{domain}</span>,
+              <span className="text-[#216e88] font-semibold">{domain}</span>,
               here is your personalized analysis.
             </p>
           </div>
@@ -138,7 +138,7 @@ export default function ResultClient() {
                 <div className="text-2xl font-bold mb-4">$49.99</div>
                 <button
                   onClick={() => setShowAuth(true)}
-                  className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700"
+                  className="px-6 py-3 bg-[#139fd6] text-white rounded-xl hover:bg-[#50b3cf]"
                 >
                   View Course
                 </button>
@@ -155,19 +155,19 @@ export default function ResultClient() {
                 <p className="text-gray-600 mb-6">
                   Perfect for beginners looking to build foundation.
                 </p>
-                <div className="text-green-600 font-bold text-xl mb-4">
+                <div className="text-[#139fd6] font-bold text-xl mb-4">
                   Free
                 </div>
                 <button
                   onClick={() => setShowAuth(true)}
-                  className="px-6 py-3 border border-green-600 text-green-600 rounded-xl hover:bg-green-50"
+                  className="px-6 py-3 border border-[#139fd6] text-[#139fd6] rounded-xl hover:bg-blue-50"
                 >
                   Start Learning
                 </button>
               </div>
 
               {/* CTA */}
-              <div className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-3xl p-10 text-center">
+              <div className="bg-gradient-to-r from-[#A9D6E5] to-[#139fd6] text-white rounded-3xl p-10 text-center">
                 <h3 className="text-2xl font-bold mb-4">
                   Ready to unlock your full potential?
                 </h3>
