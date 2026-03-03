@@ -100,7 +100,7 @@ function DashboardNavbar({ email, streak }: { email: string; streak: number }) {
       {/* ================= RIGHT ================= */}
       <div className="flex items-center gap-10">
 
-        {/* ---------- STREAK ---------- */}
+        {/* ----------  ---------- */}
         <div
           className="relative"
           onMouseEnter={() => setOpenStreak(true)}

@@ -13,62 +13,75 @@ export default function AboutPage() {
         </p>
       </section>
 
-      {/* ================= SECTION 1 : MISSION & WHY US ================= */}
-<section className="max-w-7xl mx-auto px-6 pb-12 grid grid-cols-1 md:grid-cols-2 gap-20">
-   {/* LEFT IMAGE */}
-  <div className="hidden lg:block absolute left-10 top-1/2 -translate-y-1/2">
-    <Image
-      src="/right-image.png"
-      alt="Left Illustration"
-      width={600}
-      height={800}
-      className="object-contain"
-    />
+{/* ================= SECTION 1 : MISSION & WHY US ================= */}
+<section className="relative py-24 overflow-hidden">
+
+  {/* CENTER CONTENT WRAPPER */}
+  <div className="relative max-w-6xl mx-auto px-6">
+
+    {/* LEFT CHARACTER */}
+    <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full">
+      <Image
+        src="/left-image.png"
+        alt="Left character"
+        width={300}
+        height={500}
+        className="object-contain"
+        priority
+      />
+    </div>
+
+    {/* RIGHT CHARACTER */}
+    <div className="hidden xl:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-full">
+      <Image
+        src="/right-image.png"
+        alt="Right character"
+        width={300}
+        height={500}
+        className="object-contain"
+        priority
+      />
+    </div>
+
+    {/* TEXT GRID */}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-24 text-center md:text-left">
+
+      {/* LEFT */}
+      <div>
+        <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
+        <p className="text-gray-600 mb-5 leading-relaxed">
+          We believe that everyone deserves access to quality education that
+          can transform their lives. Our platform bridges the gap between
+          ambition and achievement by providing structured learning paths,
+          real-world experience, and professional guidance.
+        </p>
+        <p className="text-gray-600 leading-relaxed">
+          Through assessments, courses, internships, and personalized
+          roadmaps, we help learners build meaningful careers.
+        </p>
+      </div>
+
+      {/* RIGHT */}
+      <div>
+        <h2 className="text-3xl font-bold mb-6">Why Choose Us?</h2>
+        <ul className="space-y-5">
+          {[
+            "Industry-aligned curriculum",
+            "Expert mentorship",
+            "Hands-on practical experience",
+            "Career-focused guidance",
+          ].map((item, index) => (
+            <li key={index} className="flex items-start gap-4">
+              <span className="mt-1 h-4 w-4 rounded-full bg-[#8acce2]"></span>
+              <p className="text-gray-700">{item}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
   </div>
-
-  {/* RIGHT IMAGE */}
-  <div className="hidden lg:block absolute right-10 top-1/2 -translate-y-1/2">
-    <Image
-      src="/left-image.png"
-      alt="Right Illustration"
-      width={600}
-      height={800}
-      className="object-contain"
-    />
-  </div>        
-        {/* LEFT */}
-        <div>
-          <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
-          <p className="text-gray-600 mb-5 leading-relaxed">
-            We believe that everyone deserves access to quality education that
-            can transform their lives. Our platform bridges the gap between
-            ambition and achievement by providing structured learning paths,
-            real-world experience, and professional guidance.
-          </p>
-          <p className="text-gray-600 leading-relaxed">
-            Through assessments, courses, internships, and personalized
-            roadmaps, we help learners build meaningful careers.
-          </p>
-        </div>
-
-        {/* RIGHT */}
-        <div>
-          <h2 className="text-3xl font-bold mb-6">Why Choose Us?</h2>
-          <ul className="space-y-5">
-            {[
-              "Industry-aligned curriculum",
-              "Expert mentorship",
-              "Hands-on practical experience",
-              "Career-focused guidance",
-            ].map((item, index) => (
-              <li key={index} className="flex items-start gap-4">
-                <span className="mt-1 h-4 w-4 rounded-full bg-[#8acce2]"></span>
-                <p className="text-gray-700">{item}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+</section>
 
       {/* ================= SECTION 2 : CORE VALUES ================= */}
       <section className="pt-12 pb-20">

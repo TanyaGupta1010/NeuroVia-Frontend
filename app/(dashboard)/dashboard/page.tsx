@@ -6,6 +6,7 @@ import {
   ArrowRight,
   Brain,
   Trophy,
+  Flame,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -28,7 +29,7 @@ export default function DashboardPage() {
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
       <StatCard title="Courses Enrolled" value="3" />
       <StatCard title="Completed" value="1" />
-      <StatCard title=" Streak" value="5 Days 🔥" />
+      <StatCard title=" Streak" value="5 Days" icon={<Flame className="text-orange-500" size={20} />} />
     </div>
 
     {/* Welcome Card */}
@@ -56,7 +57,7 @@ export default function DashboardPage() {
         <h3 className="text-xl font-semibold text-black">
           Your Courses
         </h3>
-        <span className="text-blue-600 cursor-pointer hover:underline">
+        <span className="text-[#139fd6] cursor-pointer hover:underline">
           View All
         </span>
       </div>
@@ -64,19 +65,19 @@ export default function DashboardPage() {
       <CourseCard
         title="Introduction to Psychology"
         progress={75}
-        color="bg-purple-500"
+        color="bg-[#75094d]"
       />
 
       <CourseCard
         title="Advanced Neuroscience"
         progress={30}
-        color="bg-blue-500"
+        color="bg-[#560975]"
       />
 
       <CourseCard
         title="Cognitive Behavioral Therapy"
         progress={0}
-        color="bg-green-500"
+        color="bg-[#093475]"
       />
     </div>
   </div>
@@ -114,7 +115,7 @@ export default function DashboardPage() {
 
       <button
         onClick={() => router.push("/assessment")}
-        className="bg-white text-blue-600 px-5 py-2 rounded-xl font-semibold hover:scale-105 transition"
+        className="bg-white text-[#139fd6] px-5 py-2 rounded-xl font-semibold hover:scale-105 transition"
       >
         Take a Quiz
       </button>
@@ -144,7 +145,7 @@ export default function DashboardPage() {
   </h3>
 
   <div className="flex justify-center gap-4 text-2xl">
-    🏆 🎯 📘 🔥
+    🏆 🎯 📘 
   </div>
 
   <p className="text-gray-500 text-sm mt-4">
@@ -180,7 +181,7 @@ function CourseCard({
           <div className="flex items-center gap-4">
             <div className="w-full bg-gray-200 h-2 rounded-full">
               <div
-                className="bg-blue-600 h-2 rounded-full transition-all duration-500"
+                className="bg-[#139fd6] h-2 rounded-full transition-all duration-500"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -196,11 +197,31 @@ function CourseCard({
     </div>
   );
 }
-function StatCard({ title, value }: { title: string; value: string }) {
+function StatCard({
+  title,
+  value,
+  icon,
+}: {
+  title: string;
+  value: string;
+  icon?: React.ReactNode;
+}) {
   return (
     <div className="bg-white p-6 rounded-2xl shadow-sm">
-      <p className="text-gray-500 text-sm mb-2">{title}</p>
-      <h3 className="text-2xl font-bold text-black">{value}</h3>
+      
+      {/* Title */}
+      <p className="text-gray-500 text-sm mb-2">
+        {title}
+      </p>
+
+      {/* Value + Icon */}
+      <div className="flex items-center gap-2">
+        <h3 className="text-2xl font-bold text-black">
+          {value}
+        </h3>
+        {icon}
+      </div>
+
     </div>
   );
 }

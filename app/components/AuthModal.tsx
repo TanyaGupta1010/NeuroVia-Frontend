@@ -123,7 +123,7 @@ export default function AuthModal({ close }: any) {
           {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
           <span
             onClick={() => setIsLogin(!isLogin)}
-            className="text-blue-600 cursor-pointer"
+            className="text-[#139fd6] cursor-pointer"
           >
             {isLogin ? "Sign Up" : "Log In"}
           </span>
