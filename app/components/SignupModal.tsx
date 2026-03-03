@@ -64,7 +64,7 @@ export default function SignupModal({ close, openLogin }: any) {
         </button>
 
         <p className="text-center text-sm mt-4">
-          Already have an account?{" "}
+           have an account?{" "}
           <span
             onClick={openLogin}
             className="text-blue-600 cursor-pointer"
