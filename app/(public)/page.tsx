@@ -10,106 +10,103 @@ export default function HomePage() {
 
   return (
     <>
-      <main className="bg-white text-black">
+      {/* This wrapper detects if the modal is open. 
+        If true, it blurs the background and prevents clicking on it.
+      */}
+      <div 
+        className={`transition-all duration-500 ease-in-out ${
+          openAuth ? "blur-md scale-[0.98] pointer-events-none select-none" : ""
+        }`}
+      >
+        <main className="bg-white text-black">
 
-        {/* ================= HERO ================= */}
-        <section className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 className="text-5xl font-bold leading-tight mb-6">
-              Learn Smarter. <br />
-              Build Real Skills. <br />
-              Grow with NeuroVia.
-            </h1>
+          {/* ================= HERO ================= */}
+          <section className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center min-h-[80vh]">
+            <div>
+              <h1 className="text-6xl font-extrabold leading-[1.1] tracking-tight mb-6">
+                Learn Smarter. <br />
+                <span className="text-gray-400">Build Real Skills.</span> <br />
+                Grow with NeuroVia.
+              </h1>
 
-            <p className="text-lg text-gray-600 mb-8 max-w-xl">
-              AI-personalized skill assessment, learning roadmaps, and
-              career-ready guidance — all in one platform.
-            </p>
+              <p className="text-xl text-gray-500 mb-8 max-w-lg leading-relaxed">
+                AI-personalized skill assessment, learning roadmaps, and
+                career-ready guidance — all in one platform.
+              </p>
 
-            <div className="flex gap-4">
-              <button
-                onClick={() => setOpenAuth(true)}
-                className="px-6 py-3 bg-black text-white rounded-full font-semibold"
-              >
-                Sign Up
-              </button>
+              <div className="flex gap-4">
+                <button
+                  onClick={() => setOpenAuth(true)}
+                  className="px-8 py-4 bg-black text-white rounded-full font-bold text-lg hover:bg-zinc-800 transition-transform active:scale-95 shadow-xl shadow-black/10"
+                >
+                  Get Started
+                </button>
 
-              <a
-                href="/assessment"
-                className="px-6 py-3 border border-black rounded-full font-semibold"
-              >
-                Take Skill Quiz
-              </a>
-
+                <a
+                  href="/assessment"
+                  className="px-8 py-4 border border-gray-200 rounded-full font-bold text-lg hover:bg-gray-50 transition-all"
+                >
+                  Take Skill Quiz
+                </a>
+              </div>
             </div>
-          </div>
 
-          <div className="relative h-150 w-full">
-            <Image
-            src="/career-illustration.png"
-    alt="Career Guidance Illustration"
-    fill
-    className="object-contain"
-    priority
-  />
-</div>
-        </section>
+            <div className="relative h-[500px] w-full animate-in fade-in slide-in-from-right duration-1000">
+              <Image
+                src="/career-illustration.png"
+                alt="Career Guidance Illustration"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          </section>
 
+          {/* ================= COURSES & INTERNSHIPS ================= */}
+          <section className="bg-gray-50 py-24 border-y border-gray-100">
+            <div className="max-w-7xl mx-auto px-6">
+              <div className="flex items-center gap-4 mb-12">
+                <div className="w-12 h-12 rounded-2xl bg-black flex items-center justify-center shadow-lg shadow-black/20">
+                  <BookOpenText className="w-6 h-6 text-white" />
+                </div>
+                <h2 className="text-4xl font-bold tracking-tight">
+                  Courses & Internships
+                </h2>
+              </div>
+              <AutoCarousel />
+            </div>
+          </section>
 
-        {/* ================= COURSES & INTERNSHIPS ================= */}
-        <section className="bg-gray-50 py-16">
-  <div className="max-w-7xl mx-auto px-6">
-    
-    {/* Header with Icon */}
-    <div className="flex items-center gap-4 mb-8">
-      <div className="w-14 h-14 rounded-full bg-[#A9D6E5] flex items-center justify-center">
-        <BookOpenText className="w-8 h-8 text-black" />
+          {/* ================= WHY NEUROVIA ================= */}
+          <section className="max-w-7xl mx-auto px-6 py-32 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+            <div>
+              <h2 className="text-4xl font-bold mb-6 tracking-tight">
+                Why NeuroVia?
+              </h2>
+              <p className="text-xl text-gray-500 max-w-md leading-relaxed">
+                Most platforms give generic roadmaps.
+                NeuroVia evaluates your real skills and adapts learning
+                so you always know what to learn next.
+              </p>
+            </div>
+            <div className="h-80 bg-zinc-900 text-white rounded-[2.5rem] flex items-center justify-center text-xl font-bold shadow-2xl overflow-hidden border-8 border-white">
+              <span className="opacity-50 tracking-widest uppercase text-sm">Demo Video</span>
+            </div>
+          </section>
+
+          {/* ================= INTERACTIVE SECTION ================= */}
+          <section className="bg-black text-white py-32 text-center rounded-t-[3rem]">
+            <h2 className="text-5xl font-extrabold mb-6 tracking-tighter">
+              Feel the Learning
+            </h2>
+            <p className="text-xl text-gray-400 font-medium">
+              Interactive • Guided • Career-Focused
+            </p>
+          </section>
+        </main>
       </div>
 
-      <h2 className="text-3xl font-bold">
-        Courses & Internships
-      </h2>
-    </div>
-
-    <AutoCarousel />
-    
-  </div>
-</section>
-
-
-        {/* ================= WHY NEUROVIA ================= */}
-        <section className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-3xl font-bold mb-4">
-              Why NeuroVia?
-            </h2>
-
-            <p className="text-gray-600 max-w-md">
-              Most platforms give generic roadmaps.
-              NeuroVia evaluates your real skills and adapts learning
-              so you always know what to learn next.
-            </p>
-          </div>
-
-          <div className="h-64 bg-black text-white rounded-xl flex items-center justify-center text-xl font-semibold">
-            DEMO VIDEO
-          </div>
-        </section>
-
-
-        {/* ================= INTERACTIVE SECTION ================= */}
-        <section className="bg-black text-white py-20 text-center">
-          <h2 className="text-4xl font-bold mb-4">
-            Feel the Learning
-          </h2>
-
-          <p className="text-lg text-gray-400">
-            Interactive • Guided • Career-Focused
-          </p>
-        </section>
-
-      </main>
-
+      {/* The Modal remains outside the blurred div */}
       {openAuth && (
         <AuthModal close={() => setOpenAuth(false)} />
       )}
