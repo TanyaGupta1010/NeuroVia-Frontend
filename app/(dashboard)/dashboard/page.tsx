@@ -43,13 +43,13 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      <button
-        onClick={() => router.push("/course")}
-        className="bg-[#139fd6] text-white px-6 py-3 rounded-xl font-semibold hover:scale-105 transition"
-      >
-        Continue Learning
-      </button>
-    </div>
+     <button
+    onClick={() => router.push("libraries/courses")} // Changed from /course to /libraries
+    className="bg-[#139fd6] text-white px-6 py-3 rounded-xl font-semibold hover:scale-105 transition"
+  >
+    Continue Learning
+  </button>
+</div>
 
     {/* Courses */}
     <div>
