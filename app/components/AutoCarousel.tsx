@@ -31,7 +31,15 @@ export default function AutoCarousel() {
     return () => cancelAnimationFrame(animationFrame);
   }, [isPaused]);
 
-  const numbers = [1, 2, 3, 4, 5, 6];
+  // Put your image URLs here
+  const images = [
+    "https://res.cloudinary.com/dx0r0pbgb/image/upload/v1772990020/coursera_mdhnjh.png",
+    "https://res.cloudinary.com/dx0r0pbgb/image/upload/v1772990868/udemy-removebg-preview_m81wtx.png",
+    "https://res.cloudinary.com/dx0r0pbgb/image/upload/v1772990321/infosys_bjo1gy.png",
+    "https://res.cloudinary.com/dx0r0pbgb/image/upload/v1772991018/fcc_nteznp.png",
+    "https://res.cloudinary.com/dx0r0pbgb/image/upload/v1772990511/aws_rlhwup.png",
+    "https://res.cloudinary.com/dx0r0pbgb/image/upload/v1772990667/ms_mddnno.png",
+  ];
 
   return (
     <section
@@ -47,7 +55,7 @@ export default function AutoCarousel() {
         ref={trackRef}
         className="flex gap-12 overflow-x-hidden"
       >
-        {[...numbers, ...numbers].map((num, index) => (
+        {[...images, ...images].map((image, index) => (
           <div
             key={index}
             className="
@@ -69,7 +77,11 @@ export default function AutoCarousel() {
               hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)]
             "
           >
-            {num}
+          <img
+              src={image}
+              alt="carousel"
+              className="w-full h-full object-cover"
+            />
           </div>
         ))}
       </div>
