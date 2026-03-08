@@ -92,9 +92,9 @@ function DashboardNavbar({ email, streak }: { email: string; streak: number }) {
             </div>
           </div>
 
-          <span className="cursor-pointer hover:text-blue-600 transition">
+          {/* <span className="cursor-pointer hover:text-blue-600 transition">
             Roadmap
-          </span>
+          </span> */}
         </div>
       </div>
 
@@ -214,13 +214,13 @@ function DashboardNavbar({ email, streak }: { email: string; streak: number }) {
                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">Account</p>
                 <p className="text-sm font-bold truncate">{email}</p>
               </div>
-              <div 
+              {/* <div 
                 onClick={() => router.push("/profile")}
                 className="px-5 py-3 hover:bg-gray-50 cursor-pointer text-sm font-bold flex items-center gap-3 transition-colors"
               >
                 <Settings size={18} className="text-gray-400" />
                 Settings
-              </div>
+              </div> */}
               <div 
                 onClick={handleLogout}
                 className="px-5 py-4 hover:bg-red-50 cursor-pointer text-sm font-black text-red-500 flex items-center gap-3 transition-colors border-t border-gray-50"
