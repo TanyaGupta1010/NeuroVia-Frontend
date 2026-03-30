@@ -55,17 +55,17 @@ function AssessmentContent() {
   return (
     <main className="relative min-h-screen bg-gray-50 py-20 px-6 overflow-hidden">
       {/* Left Decorative Image */}
-      <img
+      {/* <img
         src="/Peeking left.png"
         alt="Decorative"
         className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/3 w-150 opacity-100 pointer-events-none"
-      />
+      /> */}
       {/* Right Decorative Image */}
-      <img
+      {/* <img
         src="/Peeking right.png"
         alt="Decorative"
         className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 w-150 opacity-100 pointer-events-none"
-      />
+      /> */}
 
       <div className="max-w-7xl mx-auto text-center relative z-10">
         <h1 className="text-5xl font-bold text-black mb-4">Discover Your Path</h1>
