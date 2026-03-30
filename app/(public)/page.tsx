@@ -91,17 +91,18 @@ export default function HomePage() {
             </div>
 
             {/* Demo Video */}
-            <div className="h-80 bg-zinc-900 text-white rounded-[2.5rem] flex items-center justify-center text-xl font-bold shadow-2xl overflow-hidden border-8 border-white">
-              <video
-                className="w-full h-full object-cover"
-                autoPlay muted loop
-                poster="https://res.cloudinary.com/dx0r0pbgb/image/upload/v1772991680/Screenshot_2026-03-08_231030_e5ny89.png"
-              >
-                <source src="/demo-video.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-
-            </div>
+            <video
+  className="w-full h-full object-cover"
+  autoPlay
+  muted
+  loop
+  controls
+>
+  <source
+    src="https://res.cloudinary.com/YOUR_ID/video/upload/YOUR_VIDEO.mp4"
+    type="video/mp4"
+  />
+</video>
           </section>
 
           {/* ================= INTERACTIVE SECTION ================= */}
