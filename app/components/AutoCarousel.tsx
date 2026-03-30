@@ -60,7 +60,7 @@ export default function AutoCarousel() {
             key={index}
             className="
               min-w-[260px]
-              h-[160px]
+              h-[100px]
               bg-white
               rounded-3xl
               flex
