@@ -28,7 +28,7 @@ export default function ContactPage() {
   </div>
 
   <h3 className="text-xl font-bold text-black mb-2">Email</h3>
-  <p className="text-black">contact@neurovision.com</p>
+  <p className="text-black">contact@neurovia.in</p>
 </div>
 
             {/* PHONE */}
@@ -38,7 +38,7 @@ export default function ContactPage() {
               </div>
 
               <h3 className="text-xl font-bold text-black mb-2">Phone</h3>
-              <p className="text-black">+1 (555) 123-4567</p>
+              <p className="text-black">+91 98765 43210</p>
             </div>
 
             {/* LOCATION */}
@@ -48,7 +48,7 @@ export default function ContactPage() {
               </div>
 
               <h3 className="text-xl font-bold text-black mb-2">Location</h3>
-              <p className="text-black">San Francisco, CA 94103</p>
+              <p className="text-black">Greater Noida, India</p>
             </div>
 
           </div>
