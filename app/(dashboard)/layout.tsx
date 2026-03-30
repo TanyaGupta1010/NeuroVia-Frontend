@@ -92,9 +92,11 @@ function DashboardNavbar({ email, streak }: { email: string; streak: number }) {
             </div>
           </div>
 
-          {/* <span className="cursor-pointer hover:text-blue-600 transition">
+          <span 
+          onClick={() => router.push("/roadmap")}
+          className="cursor-pointer hover:text-blue-600 transition">
             Roadmap
-          </span> */}
+          </span>
         </div>
       </div>
 
