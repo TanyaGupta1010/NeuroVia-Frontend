@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import QuizClient from "./QuizClient"; // Ensure this file exists in the same folder
+import QuizClient from "./QuizClient"; 
 import {
   Scale,
   Briefcase,
@@ -35,8 +35,6 @@ function AssessmentContent() {
   const searchParams = useSearchParams();
   const selectedDomain = searchParams.get("domain");
 
-  // ================= QUIZ MODE =================
-  // If a domain is selected in the URL, we show the Quiz interface
   if (selectedDomain) {
     return (
       <main className="min-h-screen bg-gray-50 py-20 px-6">
@@ -48,83 +46,48 @@ function AssessmentContent() {
             <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" /> 
             Back to Domains
           </button>
-          
           <QuizClient domain={selectedDomain} />
         </div>
       </main>
     );
   }
 
-  // ================= SELECTION MODE (Your Original Design) =================
   return (
     <main className="relative min-h-screen bg-gray-50 py-20 px-6 overflow-hidden">
       {/* Left Decorative Image */}
-      {/* <img
+      <img
         src="/Peeking left.png"
         alt="Decorative"
         className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/3 w-150 opacity-100 pointer-events-none"
-      /> */}
+      />
       {/* Right Decorative Image */}
-      {/* <img
+      <img
         src="/Peeking right.png"
         alt="Decorative"
         className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 w-150 opacity-100 pointer-events-none"
-      /> */}
+      />
 
       <div className="max-w-7xl mx-auto text-center relative z-10">
-        {/* Heading */}
         <h1 className="text-5xl font-bold text-black mb-4">Discover Your Path</h1>
-
         <p className="text-gray-600 text-lg mb-12">
           Select a field you're interested in to begin your personalized assessment.
         </p>
 
-        {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {domains.map((domain, index) => {
             const Icon = domain.icon;
-
             return (
               <div
                 key={index}
                 onClick={() => router.push(`/assessment?domain=${domain.title}`)}
-                className="
-                  bg-white p-8 rounded-3xl shadow-sm 
-                  border border-gray-200
-                  transition-all duration-300
-                  hover:shadow-xl
-                  hover:scale-105
-                  hover:bg-blue-50
-                  hover:border-blue-500
-                  cursor-pointer
-                  group
-                "
+                className="bg-white p-8 rounded-3xl shadow-sm border border-gray-200 transition-all duration-300 hover:shadow-xl hover:scale-105 hover:bg-blue-50 hover:border-blue-500 cursor-pointer group"
               >
-                {/* Icon */}
-                <div
-                  className="
-                    w-14 h-14 rounded-full bg-[#A9D6E5] 
-                    flex items-center justify-center mb-6 mx-auto
-                    group-hover:bg-[#139fd6] transition-colors
-                  "
-                >
+                <div className="w-14 h-14 rounded-full bg-[#A9D6E5] flex items-center justify-center mb-6 mx-auto group-hover:bg-[#139fd6] transition-colors">
                   <Icon className="w-8 h-8 text-black group-hover:text-white transition-colors" />
                 </div>
-
-                {/* Title */}
-                <h3 className="text-xl font-semibold text-black mb-3">
-                  {domain.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-gray-600 text-sm mb-6">
-                  {domain.desc}
-                </p>
-
-                {/* Start Quiz Button */}
-                <button
-                  className="text-[#2ca2ca] font-semibold hover:underline"
-                >
+                <h3 className="text-xl font-semibold text-black mb-3">{domain.title}</h3>
+                <p className="text-gray-600 text-sm mb-6">{domain.desc}</p>
+                <button className="text-[#2ca2ca] font-semibold hover:underline">
                   Start Quiz →
                 </button>
               </div>
@@ -136,7 +99,6 @@ function AssessmentContent() {
   );
 }
 
-// Main component with Suspense wrapper (Required for useSearchParams)
 export default function AssessmentPage() {
   return (
     <Suspense fallback={
