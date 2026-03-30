@@ -20,7 +20,7 @@ export default function AboutPage() {
   <div className="relative max-w-6xl mx-auto px-6">
 
     {/* LEFT CHARACTER */}
-    <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full">
+    {/* <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full">
       <Image
         src="/left-image.png"
         alt="Left character"
@@ -29,10 +29,10 @@ export default function AboutPage() {
         className="object-contain"
         priority
       />
-    </div>
+    </div> */}
 
     {/* RIGHT CHARACTER */}
-    <div className="hidden xl:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-full">
+    {/* <div className="hidden xl:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-full">
       <Image
         src="/right-image.png"
         alt="Right character"
@@ -41,7 +41,7 @@ export default function AboutPage() {
         className="object-contain"
         priority
       />
-    </div>
+    </div> */}
 
     {/* TEXT GRID */}
     <div className="grid grid-cols-1 md:grid-cols-2 gap-24 text-center md:text-left">

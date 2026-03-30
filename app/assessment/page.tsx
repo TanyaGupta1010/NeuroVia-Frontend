@@ -73,7 +73,7 @@ export default function AssessmentPage() {
   return (
     <main className="relative min-h-screen bg-gray-50 py-20 px-6 overflow-hidden"
     >{/* Left Decorative Image */}
-<img
+{/* <img
   src="/Peeking left.png"
   alt="Decorative"
   className="
@@ -85,9 +85,9 @@ export default function AssessmentPage() {
     opacity-100
     pointer-events-none
   "
-/>
+/> */}
 {/* Right Decorative Image */}
-<img
+{/* <img
   src="/Peeking right.png"
   alt="Decorative"
   className="
@@ -99,7 +99,7 @@ export default function AssessmentPage() {
     opacity-100
     pointer-events-none
   "
-/>
+/> */}
       <div className="max-w-7xl mx-auto text-center">
 
         {/* Heading */}
