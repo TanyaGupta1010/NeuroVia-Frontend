@@ -10,9 +10,7 @@ export default function HomePage() {
 
   return (
     <>
-      {/* This wrapper detects if the modal is open. 
-        If true, it blurs the background and prevents clicking on it.
-      */}
+      {/* Wrapper for blur effect when modal is open */}
       <div 
         className={`transition-all duration-500 ease-in-out ${
           openAuth ? "blur-md scale-[0.98] pointer-events-none select-none" : ""
@@ -90,19 +88,16 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Demo Video */}
-            <video
-  className="w-full h-full object-cover"
-  autoPlay
-  muted
-  loop
-  controls
->
-  <source
-    src="https://res.cloudinary.com/YOUR_ID/video/upload/YOUR_VIDEO.mp4"
-    type="video/mp4"
-  />
-</video>
+            {/* YouTube Unlisted Video Embed */}
+            <div className="relative aspect-video w-full rounded-3xl overflow-hidden shadow-2xl border border-gray-100 bg-gray-50">
+              <iframe
+                className="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/06wrjDE3k_g?rel=0&modestbranding=1"
+                title="Why NeuroVia Demo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
           </section>
 
           {/* ================= INTERACTIVE SECTION ================= */}
@@ -117,7 +112,7 @@ export default function HomePage() {
         </main>
       </div>
 
-      {/* The Modal remains outside the blurred div */}
+      {/* Auth Modal */}
       {openAuth && (
         <AuthModal close={() => setOpenAuth(false)} />
       )}
