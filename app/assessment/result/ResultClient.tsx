@@ -1,10 +1,10 @@
 "use client";
 
 import dynamicImport from "next/dynamic";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Pie, Cell, Tooltip } from "recharts";
-import AuthModal from "@/app/components/AuthModal";
+import { MapPin, Loader2, Sparkles } from "lucide-react";
 
 /* Recharts – SSR safe */
 const PieChart = dynamicImport(
@@ -16,13 +16,6 @@ const ResponsiveContainer = dynamicImport(
   () => import("recharts").then(m => m.ResponsiveContainer),
   { ssr: false }
 );
-
-const data = [
-  { name: "Technical Skills", value: 35, color: "#2563EB" },
-  { name: "Soft Skills", value: 25, color: "#10B981" },
-  { name: "Practical Knowledge", value: 20, color: "#F59E0B" },
-  { name: "Industry Awareness", value: 20, color: "#F97316" },
-];
 
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload?.length) {
@@ -38,31 +31,59 @@ const CustomTooltip = ({ active, payload }: any) => {
 
 export default function ResultClient() {
   const params = useSearchParams();
+  const router = useRouter();
   const [domain, setDomain] = useState("your selected domain");
-  const [showAuth, setShowAuth] = useState(false);
+  const [score, setScore] = useState(0);
+  const [skillId, setSkillId] = useState("");
+  const [waitingForRoadmap, setWaitingForRoadmap] = useState(false);
+
+  // Derive skill distribution data from score
+  const getChartData = (s: number) => [
+    { name: "Correct Answers", value: s, color: "#139fd6" },
+    { name: "To Improve", value: 100 - s, color: "#e5e7eb" },
+  ];
+
+  const [chartData, setChartData] = useState(getChartData(0));
 
   useEffect(() => {
     const d = params.get("domain");
+    const s = parseInt(params.get("score") || "0", 10);
+    const sk = params.get("skillId") || localStorage.getItem("lastSkillId") || "";
     if (d) setDomain(d);
+    setScore(s);
+    setSkillId(sk);
+    setChartData(getChartData(s));
   }, [params]);
+
+  const handleViewRoadmap = async () => {
+    if (!skillId) return;
+    localStorage.setItem("lastSkillId", skillId);
+    localStorage.setItem("lastDomain", domain);
+    router.push(`/roadmap/${skillId}`);
+  };
+
+  const levelLabel = score >= 70 ? "Advanced" : score >= 40 ? "Intermediate" : "Beginner";
+  const levelColor = score >= 70 ? "text-emerald-500" : score >= 40 ? "text-yellow-500" : "text-orange-500";
 
   return (
     <>
-      {showAuth && <AuthModal close={() => setShowAuth(false)} />}
 
       <main className="min-h-screen bg-gray-50 text-black py-20 px-6">
         <div className="max-w-7xl mx-auto">
 
           {/* Header */}
           <div className="text-center mb-16">
-            <h1 className="text-4xl font-bold mb-4">
-              Assessment Complete
-            </h1>
+            <div className="inline-flex items-center gap-2 bg-green-50 text-emerald-600 px-4 py-2 rounded-full text-sm font-bold mb-6">
+              ✓ Assessment Complete
+            </div>
+            <h1 className="text-4xl font-bold mb-2">Your Results</h1>
             <p className="text-gray-600 text-lg">
-              Based on your responses for{" "}
-              <span className="text-[#216e88] font-semibold">{domain}</span>,
-              here is your personalized analysis.
+              You scored{" "}
+              <span className="text-[#139fd6] font-bold text-2xl">{score}%</span>{" "}
+              in <span className="text-[#216e88] font-semibold">{domain}</span>
             </p>
+            <p className={`text-lg font-bold mt-1 ${levelColor}`}>{levelLabel} Level</p>
+            <p className="text-gray-500 text-sm mt-2">Your AI-personalized roadmap is being generated...</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -74,18 +95,37 @@ export default function ResultClient() {
                 Skill Distribution
               </h2>
 
+              {/* Score display */}
+              <div className="flex items-center justify-center mb-6">
+                <div className="relative w-40 h-40">
+                  <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#e5e7eb" strokeWidth="10" />
+                    <circle
+                      cx="50" cy="50" r="40" fill="none"
+                      stroke="#139fd6" strokeWidth="10"
+                      strokeDasharray={`${2 * Math.PI * 40 * score / 100} ${2 * Math.PI * 40 * (1 - score / 100)}`}
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="text-3xl font-black text-black">{score}%</span>
+                    <span className={`text-xs font-bold ${levelColor}`}>{levelLabel}</span>
+                  </div>
+                </div>
+              </div>
+
               {/* Pie Chart */}
-              <div className="h-72">
+              <div className="h-48">
                 <ResponsiveContainer>
                   <PieChart>
                     <Tooltip content={<CustomTooltip />} />
                     <Pie
-                      data={data}
-                      innerRadius={70}
-                      outerRadius={110}
+                      data={chartData}
+                      innerRadius={50}
+                      outerRadius={80}
                       dataKey="value"
                     >
-                      {data.map((entry, index) => (
+                      {chartData.map((entry, index) => (
                         <Cell key={index} fill={entry.color} />
                       ))}
                     </Pie>
@@ -94,16 +134,12 @@ export default function ResultClient() {
               </div>
 
               {/* Legend */}
-              <div className="mt-8 space-y-2">
-                {data.map((item, index) => (
+              <div className="mt-4 space-y-2">
+                {chartData.map((item, index) => (
                   <div key={index} className="flex items-center gap-3">
-                    <div
-                      className="w-4 h-4 rounded-sm"
-                      style={{ backgroundColor: item.color }}
-                    />
-                    <span className="text-gray-700 text-sm">
-                      {item.name}
-                    </span>
+                    <div className="w-4 h-4 rounded-sm" style={{ backgroundColor: item.color }} />
+                    <span className="text-gray-700 text-sm">{item.name}</span>
+                    <span className="text-gray-500 text-sm font-bold ml-auto">{item.value}%</span>
                   </div>
                 ))}
               </div>
@@ -137,7 +173,7 @@ export default function ResultClient() {
                 </p>
                 <div className="text-2xl font-bold mb-4">$49.99</div>
                 <button
-                  onClick={() => setShowAuth(true)}
+                  onClick={() => router.push('/libraries/courses')}
                   className="px-6 py-3 bg-[#139fd6] text-white rounded-xl hover:bg-[#50b3cf]"
                 >
                   View Course
@@ -159,26 +195,32 @@ export default function ResultClient() {
                   Free
                 </div>
                 <button
-                  onClick={() => setShowAuth(true)}
+                  onClick={() => router.push('/libraries/courses')}
                   className="px-6 py-3 border border-[#139fd6] text-[#139fd6] rounded-xl hover:bg-blue-50"
                 >
                   Start Learning
                 </button>
               </div>
 
-              {/* CTA */}
+              {/* CTA — View Roadmap */}
               <div className="bg-gradient-to-r from-[#A9D6E5] to-[#139fd6] text-white rounded-3xl p-10 text-center">
-                <h3 className="text-2xl font-bold mb-4">
-                  Ready to unlock your full potential?
+                <Sparkles size={32} className="mx-auto mb-3" />
+                <h3 className="text-2xl font-bold mb-2">
+                  Your Roadmap is Ready!
                 </h3>
-                <p className="mb-6">
-                  Create an account to save your results.
+                <p className="mb-6 text-blue-100 text-sm">
+                  AI has generated a 5-step personalized roadmap based on your {score}% score.
                 </p>
                 <button
-                  onClick={() => setShowAuth(true)}
-                  className="bg-white text-black px-8 py-3 rounded-xl font-semibold"
+                  onClick={handleViewRoadmap}
+                  disabled={waitingForRoadmap || !skillId}
+                  className="bg-white text-[#139fd6] px-8 py-3 rounded-xl font-bold hover:scale-105 transition disabled:opacity-70 flex items-center gap-2 mx-auto"
                 >
-                  Sign Up to Continue →
+                  {waitingForRoadmap ? (
+                    <><Loader2 size={18} className="animate-spin" /> Preparing roadmap...</>
+                  ) : (
+                    <><MapPin size={18} /> View My Roadmap →</>
+                  )}
                 </button>
               </div>
 
