@@ -22,7 +22,7 @@ const CustomTooltip = ({ active, payload }: any) => {
     return (
       <div className="bg-white px-4 py-2 rounded-lg shadow-md border text-sm">
         <p className="font-semibold">{payload[0].name}</p>
-        <p className="text-[#A9D6E5] font-bold">{payload[0].value}%</p>
+        <p className="text-[#1d7e9e] font-bold">{payload[0].value}%</p>
       </div>
     );
   }
